@@ -1,4 +1,4 @@
-![ShadowOps Data Pipeline](images/banner-data-pipeline.png)
+![ShadowOps Data Pipeline](banner-data-pipeline.png)
 
 # ShadowOps Data Pipeline
 
@@ -79,7 +79,7 @@ Protect data integrity by favoring conservative recovery and validation processe
 
 # High-Level Architecture
 
-![ShadowOps Data Pipeline Architecture](images/architecture-data-pipeline.png)
+![ShadowOps Data Pipeline Architecture](architecture-data-pipeline.png)
 
 The architecture separates processing into independent stages, allowing each module to perform a focused operational responsibility while remaining part of a larger automated workflow.
 
@@ -99,7 +99,7 @@ Core processing stages include:
 
 # Operational Workflow
 
-![ShadowOps Data Pipeline Workflow](images/workflow-data-pipeline.png)
+![ShadowOps Data Pipeline Workflow](workflow-data-pipeline.png)
 
 A typical execution flow follows this sequence:
 
@@ -120,15 +120,17 @@ A typical execution flow follows this sequence:
 ```text
 shadowops-data-pipeline/
 │
-├── images/
-│   ├── banner-data-pipeline.png
-│   ├── architecture-data-pipeline.png
-│   └── workflow-data-pipeline.png
+├── banner-data-pipeline.png
+├── architecture-data-pipeline.png
+├── workflow-data-pipeline.png
 │
 ├── shadowops_dedup_engine.py
 ├── RESUME_STATE_ROUTER.py
 ├── run_C1_forensic_compare.py
 ├── run_section_compare.py
+│
+├── images/
+│   └── .gitkeep
 │
 ├── README.md
 ├── LICENSE
@@ -139,25 +141,21 @@ shadowops-data-pipeline/
 
 # Core Components
 
-### Deduplication Engine
+### `shadowops_dedup_engine.py`
 
-Identifies duplicate operational records through repeatable comparison logic and persistent indexing.
+A manifest-driven deduplication engine that normalizes records, generates SHA-1 fingerprints, stores persistent record indexes in SQLite, tracks duplicate records, and produces operational summaries.
 
-### State Routing
+### `RESUME_STATE_ROUTER.py`
 
-Routes records into structured geographic workflows for downstream processing.
+A state-routing utility designed to resume and continue structured geographic processing across large operational datasets.
 
-### Forensic Comparison
+### `run_C1_forensic_compare.py`
 
-Performs large-scale dataset comparison to identify overlap, redundancy, and unmatched records.
+A large-scale forensic comparison engine that builds a persistent SQLite reference index and evaluates an entire file environment for redundant, unique, invalid, or unreadable data.
 
-### Section Comparison
+### `run_section_compare.py`
 
-Supports targeted analysis across operational subsets.
-
-### Operational Reporting
-
-Produces metrics and reporting used to evaluate workflow performance and processing outcomes.
+A targeted comparison utility that evaluates one selected operational section against the trusted reference dataset and produces file-level match, unmatched, and deletion-safety results.
 
 ---
 
@@ -172,6 +170,8 @@ Produces metrics and reporting used to evaluate workflow performance and process
 - SQLite
 - CSV
 - Text Processing
+- Record Fingerprinting
+- Persistent Indexing
 
 ## Engineering
 
@@ -181,20 +181,25 @@ Produces metrics and reporting used to evaluate workflow performance and process
 - Record Classification
 - Validation Pipelines
 - Deduplication
-- Persistent Indexing
+- Recursive File Processing
+- Batch Processing
+- Progress Telemetry
 
 ---
 
 # Engineering Highlights
 
-- Modular architecture
+- Modular processing architecture
+- Manifest-driven execution
 - Persistent SQLite indexing
 - SHA-1 record fingerprinting
-- Workflow automation
-- Operational reporting
-- Data validation
-- Recovery workflows
-- Scalable processing architecture
+- Record normalization
+- Batch transaction handling
+- Duplicate tracking
+- File-level and global reporting
+- Conservative recovery logic
+- High-volume data processing
+- Long-running process visibility
 - Engineering-first design philosophy
 
 ---
@@ -203,14 +208,16 @@ Produces metrics and reporting used to evaluate workflow performance and process
 
 The platform is applicable to organizations requiring reliable processing of large operational datasets, including:
 
-- Lead management
+- Lead database management
 - Data migration
 - Data quality initiatives
 - Operational reporting
 - Workflow automation
 - Record validation
 - Duplicate detection
+- Data recovery
 - Large-scale file processing
+- Section-level forensic comparison
 
 ---
 
@@ -219,13 +226,39 @@ The platform is applicable to organizations requiring reliable processing of lar
 Planned areas of expansion include:
 
 - Configuration-driven workflows
+- Command-line interfaces
 - Parallel processing support
+- Structured logging
+- Automated testing
 - REST API integration
 - Dashboard visualization
 - Enhanced reporting
 - Additional validation modules
 - Cloud deployment options
 - Containerized execution
+- Sample datasets and demonstrations
+
+---
+
+# Security Note
+
+SHA-1 is used in this project as a fast record-equality fingerprint.
+
+It is not used for passwords, authentication, encryption, or security-sensitive storage.
+
+No private operational datasets are included in this repository.
+
+---
+
+# Author
+
+**Patrick Estrada**
+
+Systems Architect  
+Automation Engineer  
+Operational Software Engineer  
+AI-Assisted Development  
+Mission-Critical Operations
 
 ---
 
@@ -234,4 +267,3 @@ Planned areas of expansion include:
 Released under the MIT License.
 
 See the `LICENSE` file for additional information.
-
