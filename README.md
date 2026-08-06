@@ -1,4 +1,6 @@
-![ShadowOps Data Pipeline](banner-data-pipeline.png)
+<p align="center">
+  <img src="banner-data-pipeline.png" width="100%">
+</p>
 
 # ShadowOps Data Pipeline
 
@@ -79,7 +81,9 @@ Protect data integrity by favoring conservative recovery and validation processe
 
 # High-Level Architecture
 
-![ShadowOps Data Pipeline Architecture](architecture-data-pipeline.png)
+<p align="center">
+  <img src="architecture-data-pipeline.png" width="850">
+</p>
 
 The architecture separates processing into independent stages, allowing each module to perform a focused operational responsibility while remaining part of a larger automated workflow.
 
@@ -99,7 +103,9 @@ Core processing stages include:
 
 # Operational Workflow
 
-![ShadowOps Data Pipeline Workflow](workflow-data-pipeline.png)
+<p align="center">
+  <img src="workflow-data-pipeline.png" width="850">
+</p>
 
 A typical execution flow follows this sequence:
 
